@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Blog</title>
+</head>
+
+<body>
+    <h1>Blog</h1>
+
+    <!-- views.py의 index() 함수에서 쿼리를 통해 받아온 Post 레코드들을 for문을 이용해서 뿌려주기 -->
+    {% for p in posts %}
+
+    <h2>{{ p.title }}</h2>
+    <h3>{{ p.created_at }}</h3>
+    <p>{{ p.content }}</p>
+    {% endfor %}
+
+</body>
+
+</html>
