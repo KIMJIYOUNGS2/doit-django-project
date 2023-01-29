@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "doit-django-project"
+version = "0.1.0"
+description = ""
+authors = ["jiyoungkimm <rla1014ss@gmail.com>"]
+readme = "README.md"
+packages = [{include = "doit_django_project"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
