@@ -13,4 +13,16 @@ def index(request):
         }
     )
 
+
+def single_post_page(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    return render(
+        request,
+        'blog/single_post_page.html',
+        {
+            'post': post,
+        }
+    )
+
 # render 함수를 통해 템플릿 폴더에서 blog 폴더의 index.html 파일을 찾아서 방문자에게 보내줌
