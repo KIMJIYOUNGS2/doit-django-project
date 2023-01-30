@@ -7,13 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+
     <title>{{ post.title }} - Blog</title>
+
     <!-- Favicon-->
     <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
-    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
+
+    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'blog/css/blog-post.css' %}" media="screen">
-    <link href="css/blog-post.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/506e1a94ff.js" crossorigin="anonymous"></script>
+    <!-- <link href="css/blog-post.css" rel="stylesheet"> -->
 </head>
 
 <body>
@@ -54,12 +60,33 @@
                         <div class="text-muted fst-italic mb-2">{{ post.created_at}} </div>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="..." />
-                    </figure>
+                    <!-- 이미지가 있을 경우 보여주기 -->
+                    {% if post.head_image %}
+                    <img class="card-img-top" src="{{ post.head_image.url }}" alt="{{ post }} head image">
+                    <!-- 이미지가 없을 경우 랜덤 이미지 보여주기 -->
+                    {% else %}
+                    <img class="card-img-top" src="https://picsum.photos/seed/{{ post.id }}/800/200" alt="random_image">
+                    {% endif %}
 
                     <!-- Post Content -->
                     <p>{{ post.content }}</p>
 
+                    {% if post.file_upload %}
+                    <a href="{{ post.file_upload.url }}" class="btn btn-outline-dark" role="button">
+                        Download:
+
+                        {% if post.get_file_ext == 'csv' %}
+                        <i class="fa-solid fa-file-csv"></i>
+                        {% elif post.get_file_ext == 'xlsx' or post.get_file_ext == 'xls' %}
+                        <i class="fa-solid fa-file-excel"></i>
+                        {% elif post.get_file_ext == 'docx' or post.get_file_ext == 'doc' %}
+                        <i class="fa-solid fa-file-word"></i>
+                        {% else %}
+                        <i class="fa-solid fa-file"></i>
+                        {% endif %}
+                        {{ post.get_file_name }}
+                    </a>
+                    {% endif %}
                 </article>
                 <!-- Comments section-->
                 <section class="mb-5">
