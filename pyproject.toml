@@ -9,6 +9,7 @@ packages = [{include = "doit_django_project"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 django = "^4.1.5"
+pillow = "^9.4.0"
 
 
 [build-system]
