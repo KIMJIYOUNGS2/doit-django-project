@@ -5,12 +5,12 @@
 <head>
     <title>Blog</title>
     <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
-
+    <link rel="stylesheet" href="{% static 'blog/css/blog-post.css' %}" media="screen">
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="./index.html">Do It Django</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -96,9 +96,13 @@
                     {% else %}
                     <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
                     {% endif %}
+
                     <div class="card-body">
                         <h2 class="card-title">{{ p.title }}</h2>
-                        <p class="card-text">{{ p.content }}</p>
+                        {% if p.hook_text %}
+                        <h5 class="text-muted">{{p.hook_text}}</h5>
+                        {% endif %}
+                        <p class="card-text">{{ p.content | truncatewords:45 }}</p>
                         <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
                     </div>
                     <div class="card-footer text-muted">
