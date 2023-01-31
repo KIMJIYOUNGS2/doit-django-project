@@ -15,7 +15,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # 포스트의 작성자가 데이터베이스에서 삭제되었을 때 포스트도 삭제
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         # 포스트 번호와 제목 보여주기 [번호] 제목
