@@ -1,5 +1,6 @@
 from django.db import models
 import os
+from django.contrib.auth.models import User
 
 
 class Post(models.Model):
@@ -13,10 +14,12 @@ class Post(models.Model):
         upload_to='blog/files/%Y/%m/%d/', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    # author: 추후에 작성
+    # 포스트의 작성자가 데이터베이스에서 삭제되었을 때 포스트도 삭제
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'[{self.pk}]\n{self.title}'  # 포스트 번호와 제목 보여주기 [번호] 제목
+        # 포스트 번호와 제목 보여주기 [번호] 제목
+        return f'[{self.pk}]\n{self.title} :: {self.author}'
 
     def get_absolute_url(self):
         return f'/blog/{self.pk}/'
