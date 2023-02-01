@@ -1,11 +1,19 @@
 # from django.shortcuts import render
-from .models import Post
+from .models import Post, Category
 from django.views.generic import ListView, DetailView
 
 
 class PostList(ListView):
     model = Post
     ordering = '-pk'  # Post 레코드 중 pk값이 작은 순서대로 보여주기 = 최신글부터 나오게
+
+    def get_context_data(self, **kwargs):
+        context = super(PostList, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Post.objects.filter(
+            category=None).count()
+
+        return context
 
 
 class PostDetail(DetailView):
